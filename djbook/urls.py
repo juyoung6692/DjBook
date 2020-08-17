@@ -19,7 +19,7 @@ from django.conf.urls import include
 from djbook.views import HomeView
 
 urlpatterns = [
-    path('/', HomeView.as_view(), name='home'),
+    path('', HomeView.as_view(), name='home'),
     path('bookmark/', include('bookmark.urls')),
     path('blog/', include('blog.urls')),
     path('admin/', admin.site.urls),

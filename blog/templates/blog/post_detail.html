@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Post Detail</title>
-</head>
-<body>
+{% extends "base.html"%}
+
+{% block title %}{{ object.title }}{% endblock %}
+{% block content %}
     <h2>{{ object.title }}</h2>
     <p>
     {%  if object.get_previous %}
@@ -25,5 +23,4 @@
     <div>
         {{ object.content|linebreaks }}
     </div>
-</body>
-</html>
+{% endblock %}

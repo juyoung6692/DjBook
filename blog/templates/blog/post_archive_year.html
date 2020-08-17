@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Post Archive Year</title>
-</head>
-<body>
+{% extends "base.html"%}
+
+{% block title %}Post Archive Year{% endblock %}
+{% block content %}
     <h1>Post Archives for {{ year|date:'Y' }}</h1>
     <ul>
         {% for date in date_list %}
@@ -23,5 +21,4 @@
             {% endfor %}
         </ul>
     </div>
-</body>
-</html>
+{% endblock %}
