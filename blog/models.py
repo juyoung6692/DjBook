@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from taggit.managers import TaggableManager
 
 # Create your models here.
 class Post(models.Model):
@@ -9,6 +10,7 @@ class Post(models.Model):
     content = models.TextField('CONTENT')
     create_dt = models.DateTimeField('CREATE DATE', auto_now_add=True) #auto_now_add 객체 생성시 시간 자동기록
     modify_dt = models.DateTimeField('MODIFY DAYE', auto_now=True) #auto_now 데이터베이스에 저장 될때 시간자동기록
+    tags = TaggableManager(blank=True)
 
     class Meta:
         verbose_name = 'post'
