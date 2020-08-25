@@ -22,5 +22,7 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('bookmark/', include('bookmark.urls')),
     path('blog/', include('blog.urls')),
+    path('photo/', include('blog.urls')),
+
     path('admin/', admin.site.urls),
 ]
