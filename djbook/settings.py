@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'taggit.apps.TaggitAppConfig',
     'taggit_templatetags2',
     'photo.apps.PhotoConfig',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -139,3 +140,7 @@ TAGGIT_LIMIT = 50
 
 DISQUS_SHORTNAME = 'pydjango-web-programming'
 DISQUS_MY_DOMAIN = 'http://127.0.0.1:8000'
+
+#로그인
+LOGIN_URL = '/accounts/login'
+LOGIN_REDIRECT_URL = '/'

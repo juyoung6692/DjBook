@@ -36,6 +36,31 @@
             </ul>
         </div>
 
+        <ul class="navbar-nav ml-md-auto">
+            <li class="nav-item dropdown">
+                {% if user.is_active %}
+                <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {% firstof user.get_short_name user.get_username %}&ensp;
+                </a>
+                <div class="dropdown-menu dropdown-menu-md-right" aria-labelledby="bd-versions">
+                    <a class="dropdown-item active" href="{% url 'logout' %}">Logout</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a>
+                </div>
+                {% else %}
+                <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Anonymous&ensp;
+                </a>
+                <div class="dropdown-menu dropdown-menu-md-right" aria-labelledby="bd-versions">
+                    <a class="dropdown-item active" href="{% url 'login' %}">Login</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'register' %}">Register</a>
+                </div>
+                {% endif %}
+
+            </li>
+        </ul>
+
     </nav>
 
     <div class="container" style="max-width: 1280px">
