@@ -4,11 +4,11 @@ from django.views.generic.dates import ArchiveIndexView, YearArchiveView, MonthA
 from django.views.generic import TemplateView
 from blog.models import Post
 
-#Search
-from django.views.generic import FormView
-from blog.forms import PostSearchForm
-from django.db.models import Q
-from django.shortcuts import render
+from django.views.generic import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin #로그인 한 상태에서만 접근 가능
+from django.urls import reverse_lazy
+from djbook.views import OwnerOnlyMixin #소유자만 접근가능
+
 
 #ListView
 class PostLV(ListView):
@@ -57,3 +57,36 @@ class TaggedObjectLV(ListView):
         context = super().get_context_data(**kwargs)
         context['tagname'] = self.kwargs['tag']
         return context
+
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    fields = ['title', 'slug', 'description', 'content', 'tags']
+    initial = {'slug': 'auto-filling-do-not-input'}
+    #fields = ['title', 'description', 'content', 'tags']
+    #slug를 입력하지 말라는 의미로 initial쓰지만 위처럼 'slug'항목을 적지 않아도 테이블에 자동으로 채워짐
+    success_url = reverse_lazy('blog:lazy')
+
+    def from_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
+
+class PostChangeLV(LoginRequiredMixin, ListView):
+    template_name = 'blog/post_change_list.html'
+
+    def get_queryset(self):
+        return Post.objects.filter(owner=self.request.user)
+
+
+class PostUpdateView(OwnerOnlyMixin, UpdateView):
+    model = Post
+    fields = ['title', 'slug', 'description', 'content', 'tags']
+
+
+    success_url = reverse_lazy('blog:index')
+
+
+class PostDeleteView(OwnerOnlyMixin, DeleteView):
+    model = Post
+    success_url = reverse_lazy('blog:index')
