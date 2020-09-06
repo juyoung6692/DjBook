@@ -24,7 +24,7 @@
                     <a class="nav-link" href="{% url 'bookmark:index' %}">Bookmark</a>
                 </li>
                 <li class="nav-item dropdown">
-                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
+                   <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                    <a class="dropdown-item" href="{% url 'blog:index' %}">List</a>
                    <a class="dropdown-item" href="{% url 'blog:post_archive' %}">Archive</a>
@@ -33,6 +33,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'photo:index' %}">Photo</a>
                 </li>
+                {% if user.is_active %}
+                <li class="nav-item dropdown">
+                   <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add</a>
+                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                   <a class="dropdown-item" href="{% url 'bookmark:add' %}">Bookmark</a>
+                   <a class="dropdown-item" href="{% url 'blog:add' %}">Post</a>
+                   </div>
+                </li>
+                {% endif %}
             </ul>
         </div>
 

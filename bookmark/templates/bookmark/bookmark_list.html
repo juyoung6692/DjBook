@@ -5,9 +5,9 @@
 
     <h1>Bookmark List</h1>
 
-    <ul>
+    <ul style="list-style: none; margin-left: -30px;">
         {% for bookmark in object_list %}
-            <li><a href="{% url 'bookmark:detail' bookmark.id %}">{{ bookmark }}</a> delete <a href=""></a></li>
+            <li><a href="{% url 'bookmark:detail' bookmark.id %}">{{ bookmark }}</a></li>
         {% endfor %}
     </ul>
 
